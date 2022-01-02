@@ -73,6 +73,26 @@ dependencies {
 
 ## How to use
 
+First, you need to have desired understanding of how Guice works. \
+Integrating this extension into Majava framework is really easy. Just use the Bootstrap class provided, instead of
+default one:
+
+```java
+import tech.majava.guice.Bootstrap;
+
+class Main {
+
+    public static void main(String[] args) {
+        Bootstrap.run(args);
+    }
+
+}
+```
+
+And now you don't need to register modules manually in the majava.yml - this extension will take care of it for you. \
+If you would like to create custom Guice Modules, to handle injecting, just create a **final** class
+extending `com.google.inject.AbstractModule` and it will be registered for you automatically!
+
 ## Built With
 
 * [Java 8](https://java.com)
