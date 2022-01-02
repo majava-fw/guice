@@ -23,25 +23,34 @@ import lombok.SneakyThrows;
 import org.reflections.Reflections;
 import tech.majava.context.config.ApplicationConfig;
 import tech.majava.context.config.Config;
+import tech.majava.context.config.ConfigReader;
 import tech.majava.context.config.Methods;
 import tech.majava.modules.Module;
 import tech.majava.utils.LambaUtils;
 
 import javax.annotation.Nonnull;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 
 /**
  * <p><b>Class {@link ConfigProvider}</b></p>
  *
  * @author majksa
- * @version 1.0.0
+ * @version 1.0.1
  * @since 1.0.0
  */
 public final class ConfigProvider implements Provider<ApplicationConfig> {
 
+    @Nonnull
+    private static final ClassLoader loader = Thread.currentThread().getContextClassLoader();
+
     @Override
-    @SneakyThrows({NoSuchMethodException.class, SecurityException.class})
+    @SneakyThrows({NoSuchMethodException.class, SecurityException.class, IOException.class})
     public ApplicationConfig get() {
-        final ApplicationConfig main = ApplicationConfig.load();
+        final URL url = loader.getResource("majava.yml");
+        assert url != null;
+        final ApplicationConfig main = new ConfigReader(new File(url.getFile())).getConfig();
         if (main.getDi() == null) {
             final Methods methods = new Methods();
             methods.put(GuiceContainer.class.getDeclaredMethod("getContainer"));

@@ -6,7 +6,7 @@
 
     <groupId>tech.majava</groupId>
     <artifactId>guice</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -51,7 +51,7 @@
         <dependency>
             <groupId>com.github.majava-fw</groupId>
             <artifactId>majava</artifactId>
-            <version>1.2.0</version>
+            <version>1.1.5</version>
         </dependency>
         <dependency>
             <groupId>org.reflections</groupId>
